@@ -55,16 +55,18 @@ void Database_get(struct Connection *conn, int id) {
 void Database_set(struct Connection *conn, int id, const char *name, const char *email) {
   struct Address *addr = &conn->db->rows[id];
   addr->set = 1;
-  //FIXME: buggy
+
   char *res = strncpy(addr->name, name, MAX_DATA);
   if (!res) {
     die("Name copy failed");
   }
+  addr->name[MAX_DATA-1] = '\0';
 
   res = strncpy(addr->email, email, MAX_DATA);
   if(!res) {
     die("Email copy failed");
   }
+  addr->email[MAX_DATA-1] = '\0';
 }
 
 void Database_list(struct Connection *conn) {
