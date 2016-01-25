@@ -68,10 +68,9 @@ void Database_set(struct Connection *conn, int id, const char *name, const char 
 }
 
 void Database_list(struct Connection *conn) {
-  int i = 0;
   struct Database *db = conn->db;
 
-  for(i = 0; i < MAX_ROWS; i++) {
+  for(int i = 0; i < MAX_ROWS; i++) {
     struct Address *cur = &db->rows[i];
     if(cur->set) {
       Address_print(cur);
@@ -96,8 +95,7 @@ void Database_write(struct Connection *conn) {
 }
 
 void Database_create(struct Connection *conn) {
-  int i = 0;
-  for(i = 0; i < MAX_ROWS; i++) {
+  for(int i = 0; i < MAX_ROWS; i++) {
     struct Address addr = {.id = i, .set = 0};
     conn->db->rows[i] = addr;
   }
